@@ -2,6 +2,8 @@ using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 
+namespace WrongOrbit
+{
     public class PlayFabLogin : MonoBehaviour
     {
         private void Start()
@@ -18,7 +20,7 @@ using UnityEngine;
 
         private void OnLoginSuccess(LoginResult result)
         {
-            Debug.Log("PlayFab Success");
+            Debug.Log("PlayFab Login Success");
         }
 
         private void OnLoginFailure(PlayFabError error)
@@ -26,3 +28,4 @@ using UnityEngine;
             Debug.LogError($"Fail: {error}");
         }
     }
+}
