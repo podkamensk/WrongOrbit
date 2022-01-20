@@ -14,7 +14,7 @@ namespace WrongOrbit
                 Debug.Log("Title ID was installed");
             }
 
-            var request = new LoginWithCustomIDRequest { CustomId = "lesson3", CreateAccount = true };
+            var request = new LoginWithCustomIDRequest { CustomId = "RomanTestCustomID", CreateAccount = true };
             PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginFailure);
         }
 
