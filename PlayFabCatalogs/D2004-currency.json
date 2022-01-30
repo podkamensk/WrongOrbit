@@ -1,0 +1,20 @@
+[
+  {
+    "CurrencyCode": "DN",
+    "DisplayName": "Denarius",
+    "InitialDeposit": 0,
+    "RechargeRate": 0,
+    "RechargeMax": 0,
+    "CurrencyCodeFull": "DN (Denarius)",
+    "GameManagerClassMetadata": null
+  },
+  {
+    "CurrencyCode": "FL",
+    "DisplayName": "Fuel Stamps",
+    "InitialDeposit": 100,
+    "RechargeRate": 50,
+    "RechargeMax": 150,
+    "CurrencyCodeFull": "FL (Fuel Stamps)",
+    "GameManagerClassMetadata": null
+  }
+]
