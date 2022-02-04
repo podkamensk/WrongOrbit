@@ -37,6 +37,7 @@ namespace WrongOrbit
                 _buttonText.text = "connect";
             }
 
+            Connect();
         }
 
 
