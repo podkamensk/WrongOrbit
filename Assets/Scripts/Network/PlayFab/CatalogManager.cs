@@ -1,5 +1,6 @@
 using PlayFab;
 using PlayFab.ClientModels;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,38 +9,41 @@ namespace WrongOrbit
 {
     internal sealed class CatalogManager
     {
-        private readonly Dictionary<string, CatalogItem> _catalog;
 
         public CatalogManager()
         {
-            _catalog = new Dictionary<string, CatalogItem>();
+            LoadCatalog();
         }
 
         public void LoadCatalog()
         {
             PlayFabClientAPI.GetCatalogItems(new GetCatalogItemsRequest(), OnGetCatalogSuccess, OnFailure);
-            Debug.Log("Loading the catalog");
         }
         
         private void OnGetCatalogSuccess(GetCatalogItemsResult result)
         {
-            HandleCatalog(result.Catalog);
-            Debug.Log($"Catalog was loaded successfully with {result.Catalog.Count} items!");
+
+            PlayFabGetCatalogSuccessEventArgs args = new PlayFabGetCatalogSuccessEventArgs();
+            args.CatalogItemsList = result.Catalog;
+            OnPlayFabGetCatalogSuccess(args);
         }
 
         private void OnFailure(PlayFabError error)
         {
             var errorMessage = error.GenerateErrorReport();
-            Debug.LogError($"Something went wrong: {errorMessage}");
+            Debug.LogError($"PlayFab Catalog ManagerSomething went wrong: {errorMessage}");
         }
 
-        private void HandleCatalog(List<CatalogItem> catalog)
+
+        public void OnPlayFabGetCatalogSuccess(PlayFabGetCatalogSuccessEventArgs e)
         {
-            foreach (var item in catalog)
+            EventHandler<PlayFabGetCatalogSuccessEventArgs> handler = PlayFabGetCatalogSuccess;
+            if (handler != null)
             {
-                _catalog.Add(item.ItemId, item);
-                Debug.Log($"Catalog item {item.ItemId} was added successfully!");
+                handler(this, e);
             }
         }
+
+        public event EventHandler<PlayFabGetCatalogSuccessEventArgs> PlayFabGetCatalogSuccess;
     }
 }

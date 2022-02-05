@@ -4,26 +4,30 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
-using UnityEngine.SceneManagement;
 
 namespace WrongOrbit
 {
-    
-    public class PlayFabLogin : MonoBehaviour
+
+    internal sealed class PlayFabLogin
     {
-        [SerializeField] public Button _button;
-        [SerializeField] private TMP_Text _buttonText;
+        private Button _button;
+        private TMP_Text _buttonText;
 
         private string _prefsKey;
+        private string _titleID;
 
-        private void Awake()
+        public PlayFabLogin(string prefsKey, string titleID)
         {
-            _prefsKey = "unique-user-id";
+            _prefsKey = prefsKey;
+            _titleID = titleID;
+
+            _button = GameObject.Find("Button Playfab").GetComponent<Button>();
+            _buttonText = _button.GetComponentInChildren<TMP_Text>();
+
             _button.onClick.AddListener(TaskOnClick);
-
             _buttonText.text = "ENTER";
-
         }
+
 
         public void LogIn()
         {
@@ -33,6 +37,7 @@ namespace WrongOrbit
             var request = new LoginWithCustomIDRequest { CustomId = id, CreateAccount = !savedIDExists };
             PlayFabClientAPI.LoginWithCustomID(request, result =>
             {
+                //_playFabID = id;
                 OnLoginSuccess(result);
                 CreateAccount(savedIDExists, id);
             },
@@ -42,8 +47,11 @@ namespace WrongOrbit
 
         private void OnLoginSuccess(LoginResult result)
         {
-            SceneManager.LoadScene("ProfileScene");
-            Debug.Log("PlayFab Login Success");
+            PlayFabLoginEventArgs args = new PlayFabLoginEventArgs();
+            args.PlayFabID = result.PlayFabId;
+            args.FirstTimeLogin = result.NewlyCreated;
+            args.LastLogIn = result.LastLoginTime;
+            OnPlayFabLogin(args);
         }
 
         private void OnLoginFailure(PlayFabError error)
@@ -66,16 +74,25 @@ namespace WrongOrbit
 
         public void TaskOnClick()
         {
-            
 
             if (string.IsNullOrEmpty(PlayFabSettings.staticSettings.TitleId))
             {
-                PlayFabSettings.staticSettings.TitleId = "D2004";
+                PlayFabSettings.staticSettings.TitleId = _titleID;
                 Debug.Log("Title ID was installed");
             }
 
             LogIn();
 
         }
+        public void OnPlayFabLogin(PlayFabLoginEventArgs e)
+        {
+            EventHandler<PlayFabLoginEventArgs> handler = PlayFabLoginSuccess;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<PlayFabLoginEventArgs> PlayFabLoginSuccess;
     }
 }
