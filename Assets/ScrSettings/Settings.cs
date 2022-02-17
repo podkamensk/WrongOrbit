@@ -4,15 +4,19 @@ using System.IO;
 namespace WrongOrbit
 {
     [CreateAssetMenu(fileName = "Settings", menuName = "Settings/AllSettings")]
-    public sealed class Settings : ScriptableObject
+    internal sealed class Settings : ScriptableObject
     //The class proveds acces to the settings (e.g. Camera Settings)
     {
         [SerializeField] private string _networkSettingsPath;
         [SerializeField] private string _gameBuildSettingsPath;
+        [SerializeField] private string _uiSettingsPath;
+        [SerializeField] private string _servicesSettingsPath;
         //[SerializeField] private string _cameraSettingsPath;
 
         private NetworkSettings _networkSettings;
         private GameBuildSettings _gameBuildSettings;
+        private UISettings _uiSettings;
+        private ServicesSettings _servicesSettings;
         //private CameraSettings _cameraSet;
 
         public NetworkSettings NetworkSet
@@ -40,7 +44,30 @@ namespace WrongOrbit
                 return _gameBuildSettings;
             }
         }
+        public UISettings UISet
+        {
+            get
+            {
+                if (_uiSettings == null)
+                {
+                    _uiSettings = Load<UISettings>("Settings/" + _uiSettingsPath);
+                }
 
+                return _uiSettings;
+            }
+        }
+        public ServicesSettings ServicesSet
+        {
+            get
+            {
+                if (_servicesSettings == null)
+                {
+                    _servicesSettings = Load<ServicesSettings>("Settings/" + _servicesSettingsPath);
+                }
+
+                return _servicesSettings;
+            }
+        }
         /*
         public CameraSettings CameraSet
         {

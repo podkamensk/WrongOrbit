@@ -6,24 +6,20 @@ namespace WrongOrbit
     {
         private NetworkManager _networkManager;
         private NetworkSettings _networkSettings;
-
-        /*
-        private PlayFabLogin _playFabLogin;
-        private ProfileManager _profileManager;
-        private CatalogManager _catalogManager;
-        private InventoryManager _inventoryManager;
-        */
-
         
 
         public PlayFabManager(NetworkManager networkManager, NetworkSettings networkSeettings)
         {
             _networkManager = networkManager;
             _networkSettings = networkSeettings;
+        }
 
+        public void PlayFabLogin()
+        {
             var playFabLogin = new PlayFabLogin(_networkSettings._prefsKey, _networkSettings._playfabTitleID);
             playFabLogin.PlayFabLoginSuccess += _networkManager.c_OnPlayFabLogin;
         }
+
 
         public void FetchPlayFabAccount()
         {

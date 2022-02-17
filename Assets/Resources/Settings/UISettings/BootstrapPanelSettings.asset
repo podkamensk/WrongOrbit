@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f442277c14930428abd210c18ae5f5, type: 3}
+  m_Name: BootstrapPanelSettings
+  m_EditorClassIdentifier: 
+  _bootstrapImage: {fileID: 2800000, guid: 6ba1c5559e38f90499dcf66ac2b71a4c, type: 3}
+  _bootstrapImagePivot: {x: 0.5, y: 0.5}
+  _enterPanelImageSize: {x: 400, y: 225}
+  _enterPanelImagePivot: {x: 0.5, y: 0.5}
+  _enterPanelImageCoordsDeviation: {x: 0, y: -75}
+  _enterPanelColor: {r: 0.20000002, g: 0.20000002, b: 0.20000002, a: 0.7647059}
+  _enterButtonImage: {fileID: 2800000, guid: 139a74fe3df7fe142967d2cb91bf6d39, type: 3}
+  _enterButtonImageSize: {x: 100, y: 50}
+  _enterButtonImagePivot: {x: 0.5, y: 0.5}
+  _enterButtonImageCoordsDeviation: {x: 0, y: -50}
+  _enterButtonLabelText: ENTER
+  _enterButtonLabelAlignment: 514
+  _enterButtonLabelColor: {r: 0.09433961, g: 0.08944463, b: 0.08944463, a: 1}
+  _enterButtonLabelFontHeight: 20
+  _gameTitleText: WRONG ORBIT
+  _gameTitleAlignment: 514
+  _gameTitlePivot: {x: 0.5, y: 0.5}
+  _gameTitleCoordsDeviation: {x: 0, y: 50}
+  _gameTitleColor: {r: 0.6698113, g: 0, b: 0.0061201686, a: 1}
+  _gameTitleFontHeight: 40

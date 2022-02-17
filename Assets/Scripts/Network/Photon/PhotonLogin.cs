@@ -2,55 +2,34 @@
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using TMPro;
-using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
 
-namespace WrongOrbit 
+namespace WrongOrbit
 {
 
-    public class PhotonLogin : MonoBehaviourPunCallbacks
+    internal sealed class PhotonLogin : IConnectionCallbacks
     {
-        [SerializeField] private TMP_Text _statusText;
-        [SerializeField] private Button _button;
-        [SerializeField] private TMP_Text _buttonText;
+        private string _gameVersion;
+        
 
-        private Color _textColorDefault = Color.black;
-        private Color _textColorConnected = Color.green;
-        private Color _textColorDisconnected = Color.red;
-
-        string _gameVersion = "1"; //hardcode
-        void Awake()
+        public PhotonLogin(string buildVersion)
         {
-            PhotonNetwork.AutomaticallySyncScene = true;
-            _button.onClick.AddListener(TaskOnClick);
-
-            if (PhotonNetwork.IsConnected)
-            {
-                _statusText.text = "Photon: connected";
-                _statusText.color = _textColorConnected;
-                _buttonText.text = "disconnect";
-            }
-            else
-            {
-                _statusText.text = "Photon: disconnected";
-                _statusText.color = _textColorDefault;
-                _buttonText.text = "connect";
-            }
-
-            Connect();
+            _gameVersion = buildVersion;
         }
 
 
         public void Connect()
         {
-            if (PhotonNetwork.IsConnected)
+            if (!PhotonNetwork.IsConnected)
             {
-                PhotonNetwork.JoinRandomRoom();
+                Debug.Log("Photon Connecting using settings");
+                PhotonNetwork.GameVersion = _gameVersion;
+                PhotonNetwork.ConnectUsingSettings();
             }
             else
             {
-                PhotonNetwork.GameVersion = _gameVersion;
-                PhotonNetwork.ConnectUsingSettings();
+                OnConnectedToMaster();
             }
         }
 
@@ -59,34 +38,58 @@ namespace WrongOrbit
             PhotonNetwork.Disconnect();
         }
 
-        public override void OnConnectedToMaster()
+        public void OnConnectedToMaster()
         {
-            Debug.Log("OnConnectedToMaster() was called by PUN");
-            _statusText.text = "Photon: connected";
-            _statusText.color = _textColorConnected;
-            _buttonText.text = "disconnect";
+            OnPhotonConnected(new EventArgs());
         }
 
-        public override void OnDisconnected(DisconnectCause cause)
+        public void OnDisconnected(DisconnectCause cause)
         {
-            Debug.Log("PHOTON Disconnected: " + cause.ToString());
-            _statusText.text = "Photon: disconnected";
-            _statusText.color = _textColorDisconnected;
-            _buttonText.text = "connect";
+            OnPhotonDisconnected(new EventArgs());
         }
 
-        public void TaskOnClick()
+
+        public void OnConnected()
         {
-            if (PhotonNetwork.IsConnected)
-            {
-                Disconnect();
-            }
-            else
-            {
-                Connect();
-            }
-            _buttonText.text = "wait";
         }
+
+        public void OnCustomAuthenticationFailed(string debugMessage)
+        {
+            Debug.Log("PhotonLogin: Custom auth failed (?????)");
+        }
+
+        public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
+        {
+            Debug.Log("PhotonLogin: Custom auth response (?????)");
+        }
+
+
+
+        public void OnRegionListReceived(RegionHandler regionHandler)
+        {
+            
+        }
+
+
+        public void OnPhotonConnected(EventArgs e)
+        {
+            EventHandler<EventArgs> handler = PhotonConnectionSuccess;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        public void OnPhotonDisconnected(EventArgs e)
+        {
+            EventHandler<EventArgs> handler = PhotonDisconnected;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<EventArgs> PhotonConnectionSuccess;
+        public event EventHandler<EventArgs> PhotonDisconnected;
     }
 }
 

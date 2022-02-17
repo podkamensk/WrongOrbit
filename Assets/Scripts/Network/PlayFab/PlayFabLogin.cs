@@ -1,8 +1,6 @@
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System;
 
 namespace WrongOrbit
@@ -10,9 +8,6 @@ namespace WrongOrbit
 
     internal sealed class PlayFabLogin
     {
-        private Button _button;
-        private TMP_Text _buttonText;
-
         private string _prefsKey;
         private string _titleID;
 
@@ -21,11 +16,7 @@ namespace WrongOrbit
             _prefsKey = prefsKey;
             _titleID = titleID;
 
-            _button = GameObject.Find("Button Playfab").GetComponent<Button>();
-            _buttonText = _button.GetComponentInChildren<TMP_Text>();
-
-            _button.onClick.AddListener(TaskOnClick);
-            _buttonText.text = "ENTER";
+            LogIn();
         }
 
 
@@ -37,7 +28,6 @@ namespace WrongOrbit
             var request = new LoginWithCustomIDRequest { CustomId = id, CreateAccount = !savedIDExists };
             PlayFabClientAPI.LoginWithCustomID(request, result =>
             {
-                //_playFabID = id;
                 OnLoginSuccess(result);
                 CreateAccount(savedIDExists, id);
             },
@@ -58,7 +48,6 @@ namespace WrongOrbit
         {
 
             Debug.LogError($"Fail: {error}");
-            _buttonText.text = "TRY AGAIN";
         }
 
         public void CreateAccount(bool exists, string id)
