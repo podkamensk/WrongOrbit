@@ -1,0 +1,128 @@
+{
+  "CatalogVersion": "0.01",
+  "Catalog": [
+    {
+      "ItemId": "wpn_s_machinegun_40",
+      "ItemClass": "Weapon",
+      "CatalogVersion": "0.01",
+      "DisplayName": "Machinegun 40",
+      "Description": "Simple but robust attack and countermeasures gun used by scout and interceptor decks",
+      "VirtualCurrencyPrices": {
+        "FL": 50
+      },
+      "RealCurrencyPrices": {},
+      "Tags": [
+        "\"Primary\"",
+        "\"Automatic\""
+      ],
+      "CustomData": null,
+      "Consumable": {
+        "UsageCount": null,
+        "UsagePeriod": null,
+        "UsagePeriodGroup": null
+      },
+      "Container": null,
+      "Bundle": null,
+      "CanBecomeCharacter": false,
+      "IsStackable": false,
+      "IsTradable": false,
+      "ItemImageUrl": null,
+      "IsLimitedEdition": false,
+      "InitialLimitedEditionCount": 0,
+      "ActivatedMembership": null
+    },
+    {
+      "ItemId": "wpn_s_cannon_00",
+      "ItemClass": "Weapon",
+      "CatalogVersion": "0.01",
+      "DisplayName": "Cannon Derated",
+      "Description": "Limited edition of the orbital siege armament retrofitted for small decks and derated for security reasons. Provides fair firepower against surface and orbital targets.",
+      "VirtualCurrencyPrices": {
+        "FL": 70,
+        "DN": 2
+      },
+      "RealCurrencyPrices": {},
+      "Tags": [
+        "\"Secondary\"",
+        "\"Burst-fire\""
+      ],
+      "CustomData": null,
+      "Consumable": {
+        "UsageCount": null,
+        "UsagePeriod": null,
+        "UsagePeriodGroup": null
+      },
+      "Container": null,
+      "Bundle": null,
+      "CanBecomeCharacter": false,
+      "IsStackable": false,
+      "IsTradable": false,
+      "ItemImageUrl": null,
+      "IsLimitedEdition": false,
+      "InitialLimitedEditionCount": 0,
+      "ActivatedMembership": null
+    },
+    {
+      "ItemId": "wpn_s_burstgun",
+      "ItemClass": "Weapon",
+      "CatalogVersion": "0.01",
+      "DisplayName": "Burstgun",
+      "Description": "Efficient countermeasure gun with high close-combat potential.",
+      "VirtualCurrencyPrices": {
+        "FL": 50
+      },
+      "RealCurrencyPrices": {},
+      "Tags": [
+        "\"Primary\"",
+        "\"Automatic\""
+      ],
+      "CustomData": null,
+      "Consumable": {
+        "UsageCount": null,
+        "UsagePeriod": null,
+        "UsagePeriodGroup": null
+      },
+      "Container": null,
+      "Bundle": null,
+      "CanBecomeCharacter": false,
+      "IsStackable": false,
+      "IsTradable": false,
+      "ItemImageUrl": null,
+      "IsLimitedEdition": false,
+      "InitialLimitedEditionCount": 0,
+      "ActivatedMembership": null
+    },
+    {
+      "ItemId": "wpn_s_rocket_launcher",
+      "ItemClass": "Weapon",
+      "CatalogVersion": "0.01",
+      "DisplayName": "Rocket Launcher",
+      "Description": "The weapon system is an evolution step from counter-target flare defense systems. Shots a burst of high velocity fire-and-forget rockets.",
+      "VirtualCurrencyPrices": {
+        "FL": 90,
+        "DN": 2
+      },
+      "RealCurrencyPrices": {},
+      "Tags": [
+        "\"Secondary\"",
+        "\"Burst-fire\""
+      ],
+      "CustomData": null,
+      "Consumable": {
+        "UsageCount": null,
+        "UsagePeriod": null,
+        "UsagePeriodGroup": null
+      },
+      "Container": null,
+      "Bundle": null,
+      "CanBecomeCharacter": false,
+      "IsStackable": false,
+      "IsTradable": false,
+      "ItemImageUrl": null,
+      "IsLimitedEdition": false,
+      "InitialLimitedEditionCount": 0,
+      "ActivatedMembership": null
+    }
+  ],
+  "DropTables": []
+}
